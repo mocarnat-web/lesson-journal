@@ -1,0 +1,13 @@
+.afterschool{gap:24px}
+.as-no-screen{background:#FF453A22;border:2px solid #FF453A;color:#FF453A;font-size:24px;font-weight:800;padding:10px 24px;border-radius:50px;animation:warningPulse 1.5s infinite}
+@keyframes warningPulse{0%,100%{opacity:1}50%{opacity:.5}}
+.as-steps{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:16px}
+.as-step{background:#1C1C1E;border-radius:20px;padding:20px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.as-step-left{display:flex;align-items:center;gap:16px;flex:1}
+.as-step-emoji{font-size:36px}
+.as-step-label{font-size:28px;font-weight:700;color:#F5F5F7}
+.as-step-people{display:flex;gap:12px;flex-wrap:wrap}
+.as-person-btn{display:flex;align-items:center;gap:8px;background:transparent;border:2px solid;border-radius:50px;padding:10px 20px;cursor:pointer;font-size:22px;font-weight:700;font-family:inherit;transition:all .2s;color:#F5F5F7}
+.as-person-btn:hover{transform:scale(1.05)}
+.as-person-btn.done{color:#fff}
+.as-unlock{text-align:center;font-size:36px;font-weight:800;color:#30D158;padding:16px;background:#30D15822;border-radius:16px}

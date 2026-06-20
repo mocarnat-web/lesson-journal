@@ -1,0 +1,9 @@
+.alert-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:8000;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px)}
+.alert-card{background:#1C1C1E;border:2px solid #F5A623;border-radius:32px;padding:56px 72px;text-align:center;max-width:640px;animation:alertPop .4s cubic-bezier(.34,1.56,.64,1) forwards}
+.alert-emoji{font-size:80px;margin-bottom:16px}
+.alert-label{font-size:48px;font-weight:800;color:#F5F5F7;margin-bottom:12px}
+.alert-time{font-size:32px;color:#F5A623;margin-bottom:20px;font-weight:600}
+.alert-who{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-bottom:32px;font-size:28px;font-weight:700}
+.alert-dismiss{background:#F5A623;color:#000;border:none;font-size:28px;font-weight:800;padding:16px 48px;border-radius:50px;cursor:pointer;transition:transform .15s}
+.alert-dismiss:hover{transform:scale(1.05)}
+@keyframes alertPop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}

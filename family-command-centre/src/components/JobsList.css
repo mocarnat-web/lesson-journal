@@ -1,0 +1,24 @@
+.jobs-screen{width:100%;height:100%;display:flex;flex-direction:column;padding:32px 48px;gap:20px;overflow:hidden}
+.jobs-header{display:flex;align-items:center;gap:24px}
+.jobs-header h1{font-size:48px;font-weight:800;color:#F5F5F7;margin:0;flex:1}
+.jobs-back{background:#2C2C2E;border:none;color:#F5F5F7;font-size:24px;font-weight:700;padding:12px 24px;border-radius:50px;cursor:pointer;font-family:inherit}
+.jobs-back:hover{background:#3A3A3C}
+.jobs-toggle{display:flex;background:#1C1C1E;border-radius:50px;padding:4px;gap:4px}
+.jt-btn{background:transparent;border:none;color:#98989D;font-size:22px;font-weight:700;padding:10px 24px;border-radius:50px;cursor:pointer;font-family:inherit;transition:all .2s}
+.jt-btn.active{background:#2C2C2E;color:#F5F5F7}
+.jobs-rooms{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:16px;padding-right:8px}
+.jobs-room{background:#1C1C1E;border-radius:20px;padding:20px 24px}
+.room-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.room-emoji{font-size:28px}
+.room-label{font-size:26px;font-weight:800;color:#F5F5F7;flex:1}
+.room-bar-wrap{width:120px;height:8px;background:#2C2C2E;border-radius:4px;overflow:hidden}
+.room-bar-fill{height:100%;background:#30D158;border-radius:4px;transition:width .5s}
+.room-pct{font-size:20px;color:#30D158;font-weight:700;min-width:44px;text-align:right}
+.room-tasks{display:flex;flex-direction:column;gap:8px}
+.room-task{display:flex;align-items:center;gap:14px;background:#2C2C2E;border:none;border-radius:14px;padding:14px 20px;cursor:pointer;text-align:left;font-family:inherit;transition:all .2s;width:100%}
+.room-task:hover{background:#3A3A3C}
+.room-task.done{opacity:.55}
+.room-checkbox{width:32px;height:32px;border-radius:8px;background:#3A3A3C;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#fff;flex-shrink:0}
+.room-checkbox.checked{background:#30D158}
+.room-task-text{font-size:22px;font-weight:600;color:#F5F5F7;flex:1}
+.room-task-by{font-size:16px;color:#636366;white-space:nowrap}
