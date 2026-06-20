@@ -1,0 +1,36 @@
+.checkin-screen {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  padding: 32px 48px; gap: 24px; overflow: hidden;
+}
+.ci-header { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.ci-header h1 { font-size: 48px; font-weight: 800; color: #F5F5F7; margin: 0; flex: 1; }
+.ci-sub { font-size: 28px; color: #98989D; margin: 0; width: 100%; }
+.ci-back {
+  background: #2C2C2E; border: none; color: #F5F5F7;
+  font-size: 24px; font-weight: 700; padding: 12px 24px;
+  border-radius: 50px; cursor: pointer; font-family: inherit;
+}
+.ci-back:hover { background: #3A3A3C; }
+
+.ci-people { flex: 1; display: flex; gap: 20px; overflow-x: auto; align-items: flex-start; padding-bottom: 8px; }
+
+.ci-card {
+  background: #1C1C1E; border: 2px solid;
+  border-radius: 24px; padding: 28px;
+  min-width: 280px; display: flex; flex-direction: column; gap: 12px;
+}
+.ci-card.done { background: #1A2C1A; }
+.ci-avatar { width: 72px; height: 72px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px; margin: 0 auto; }
+.ci-name { font-size: 32px; font-weight: 800; text-align: center; }
+.ci-yes { font-size: 22px; color: #30D158; font-weight: 700; text-align: center; }
+.ci-no { font-size: 22px; color: #FF453A; font-weight: 700; text-align: center; }
+.ci-missed-list { display: flex; flex-direction: column; gap: 4px; }
+.ci-missed-task { font-size: 18px; color: #98989D; }
+.ci-mark-btn {
+  border: none; color: #fff;
+  font-size: 20px; font-weight: 800;
+  padding: 12px 20px; border-radius: 50px;
+  cursor: pointer; font-family: inherit; transition: transform 0.15s; margin-top: 8px;
+}
+.ci-mark-btn:hover { transform: scale(1.04); }

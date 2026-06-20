@@ -1,0 +1,52 @@
+.gr-screen {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  padding: 32px 48px; gap: 20px; overflow: hidden;
+}
+.gr-header { display: flex; align-items: center; gap: 24px; }
+.gr-header h1 { font-size: 48px; font-weight: 800; color: #F5F5F7; margin: 0; flex: 1; }
+.gr-back {
+  background: #2C2C2E; border: none; color: #F5F5F7;
+  font-size: 24px; font-weight: 700; padding: 12px 24px;
+  border-radius: 50px; cursor: pointer; font-family: inherit;
+}
+.gr-back:hover { background: #3A3A3C; }
+.gr-progress-pills { display: flex; gap: 20px; font-size: 24px; font-weight: 800; }
+
+.gr-body {
+  flex: 1; overflow-y: auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; align-content: start;
+}
+.gr-body::-webkit-scrollbar { width: 6px; }
+.gr-body::-webkit-scrollbar-thumb { background: #3A3A3C; border-radius: 3px; }
+
+.gr-section {
+  background: #1C1C1E; border: 2px solid;
+  border-radius: 20px; padding: 20px 24px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.gr-section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+.gr-section-emoji { font-size: 28px; }
+.gr-section-title { font-size: 24px; font-weight: 800; flex: 1; }
+.gr-bar-wrap { width: 80px; height: 7px; background: #2C2C2E; border-radius: 4px; overflow: hidden; }
+.gr-bar-fill { height: 100%; border-radius: 4px; transition: width 0.5s; }
+
+.gr-task {
+  display: flex; align-items: center; gap: 12px;
+  background: #2C2C2E; border: 2px solid transparent;
+  border-radius: 14px; padding: 12px 16px;
+  cursor: pointer; text-align: left;
+  font-family: inherit; transition: all 0.2s; width: 100%;
+}
+.gr-task:hover { background: #3A3A3C; }
+.gr-task.done { opacity: 0.6; }
+.gr-cb {
+  width: 30px; height: 30px; border-radius: 8px;
+  border: 2px solid #636366;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 900; color: #fff;
+  flex-shrink: 0; transition: all 0.2s;
+}
+.gr-cb.checked { border-color: transparent; }
+.gr-task-text { font-size: 20px; font-weight: 600; color: #F5F5F7; }

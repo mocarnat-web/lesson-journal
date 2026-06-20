@@ -1,0 +1,21 @@
+.food-screen {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  padding: 32px 48px; gap: 24px;
+}
+.food-header { display: flex; align-items: center; gap: 24px; }
+.food-header h1 { font-size: 48px; font-weight: 800; color: #F5F5F7; margin: 0; flex: 1; }
+.food-back {
+  background: #2C2C2E; border: none; color: #F5F5F7;
+  font-size: 24px; font-weight: 700; padding: 12px 24px;
+  border-radius: 50px; cursor: pointer; font-family: inherit;
+}
+.food-placeholder {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 24px; text-align: center;
+}
+.food-icon { font-size: 96px; }
+.food-title { font-size: 52px; font-weight: 800; color: #F5F5F7; }
+.food-sub { font-size: 26px; color: #98989D; max-width: 700px; line-height: 1.5; }
+.food-features { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
+.food-feature { background: #1C1C1E; border-radius: 50px; padding: 12px 24px; font-size: 22px; font-weight: 700; color: #F5F5F7; }
