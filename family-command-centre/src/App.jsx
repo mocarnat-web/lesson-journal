@@ -17,6 +17,7 @@ import Alert from './components/Alert';
 const INITIAL_STORE = {
   points: {}, streaks: {}, completedTasks: {}, routineSteps: {},
   screenTime: {}, jobsDone: {}, jobsDoneBy: {}, girlsDone: {}, familyStreak: 0,
+  taskRunnerIdx: 0, taskRunnerStarted: null, taskRunnerDate: null,
 };
 
 export default function App() {
@@ -30,7 +31,7 @@ export default function App() {
 
   function renderScreen() {
     switch (screen) {
-      case 'home': return <Dashboard store={store} onPersonTap={handlePersonTap} onNavigate={setScreen} />;
+      case 'home': return <Dashboard store={store} setStore={setStore} onPersonTap={handlePersonTap} onNavigate={setScreen} />;
       case 'person': return <PersonView personId={activePerson} store={store} setStore={setStore} onBack={goHome} />;
       case 'morning': return <MorningRoutine store={store} setStore={setStore} onBack={goHome} />;
       case 'afterschool': return <AfterSchoolRoutine store={store} setStore={setStore} onBack={goHome} />;
@@ -41,7 +42,7 @@ export default function App() {
       case 'checkin': return <CheckIn store={store} setStore={setStore} onBack={goHome} />;
       case 'bedtime': return <BedtimeRoutine store={store} setStore={setStore} onBack={goHome} />;
       case 'food': return <FoodPlanner onBack={goHome} />;
-      default: return <Dashboard store={store} onPersonTap={handlePersonTap} onNavigate={setScreen} />;
+      default: return <Dashboard store={store} setStore={setStore} onPersonTap={handlePersonTap} onNavigate={setScreen} />;
     }
   }
 

@@ -3,9 +3,15 @@ import { FAMILY } from '../data/family';
 import { DAILY_TASKS } from '../data/jobs';
 import { WEEKLY_SCHEDULE, DAYS } from '../data/schedule';
 import './Dashboard.css';
+
 const DAYS_FULL=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 function todayKey(){const d=new Date().getDay();return DAYS[d===0?6:d-1];}
+
+const ALL_TASKS = FAMILY.flatMap(f =>
+  (DAILY_TASKS[f.id]||[]).map(t => ({ ...t, personId: f.id, person: f }))
+);
+
 function ProgressRing({percent,color,size=110}){
   const r=(size-12)/2,circ=2*Math.PI*r,offset=circ-(percent/100)*circ;
   return(<svg width={size} height={size} style={{position:'absolute',top:0,left:0}}>
@@ -15,7 +21,76 @@ function ProgressRing({percent,color,size=110}){
       style={{transform:'rotate(-90deg)',transformOrigin:'center',transition:'stroke-dashoffset 0.6s ease'}}/>
   </svg>);
 }
-export default function Dashboard({store,onPersonTap,onNavigate}){
+
+function TaskRunner({ store, setStore, now }) {
+  const today = now.toDateString();
+  const isNewDay = store.taskRunnerDate !== today;
+  const idx = isNewDay ? 0 : (store.taskRunnerIdx || 0);
+  const startedAt = isNewDay ? Date.now() : (store.taskRunnerStarted || Date.now());
+
+  const task = ALL_TASKS[idx];
+
+  if (!task) {
+    return (
+      <div className="task-runner task-runner-done">
+        <span style={{fontSize:'48px'}}>🎉</span>
+        <span className="tr-done-text">All tasks complete! Amazing work today!</span>
+        <button className="tr-reset" onClick={() => setStore(s => ({ ...s, taskRunnerIdx: 0, taskRunnerStarted: Date.now(), taskRunnerDate: today }))}>↺ Start again</button>
+      </div>
+    );
+  }
+
+  const elapsed = Math.floor((now.getTime() - startedAt) / 1000);
+  const totalSecs = (task.mins || 5) * 60;
+  const remaining = totalSecs - elapsed;
+  const over = remaining < 0;
+  const absSecs = Math.abs(remaining);
+  const mm = String(Math.floor(absSecs / 60)).padStart(2,'0');
+  const ss = String(absSecs % 60).padStart(2,'0');
+  const fillPct = Math.min(100, Math.max(0, (elapsed / totalSecs) * 100));
+
+  function advance(markDone) {
+    const updates = {
+      taskRunnerIdx: idx + 1,
+      taskRunnerStarted: Date.now(),
+      taskRunnerDate: today,
+    };
+    if (markDone) {
+      const key = `${task.personId}_${task.id}_${today}`;
+      updates.completedTasks = { ...store.completedTasks, [key]: true };
+      updates.points = { ...store.points, [task.personId]: (store.points?.[task.personId] || 0) + (task.points || 5) };
+      updates.screenTime = { ...store.screenTime, [task.personId]: (store.screenTime?.[task.personId] || 0) + 15 };
+    }
+    setStore(s => ({ ...s, ...updates }));
+  }
+
+  return (
+    <div className="task-runner" style={{ '--person-color': task.person.color }}>
+      <div className="tr-progress-bar">
+        <div className="tr-progress-fill" style={{ width: `${fillPct}%`, background: over ? '#FF453A' : task.person.color }} />
+      </div>
+      <div className="tr-body">
+        <div className="tr-who">
+          <span className="tr-emoji">{task.person.emoji}</span>
+          <span className="tr-name" style={{ color: task.person.color }}>{task.person.name}</span>
+          <span className="tr-task-text">{task.text}</span>
+          <span className="tr-count">{idx + 1} / {ALL_TASKS.length}</span>
+        </div>
+        <div className="tr-bottom">
+          <div className={`tr-timer ${over ? 'tr-over' : ''}`}>
+            {over ? <span className="tr-over-label">OVER </span> : ''}{mm}:{ss}
+          </div>
+          <div className="tr-actions">
+            <button className="tr-skip-btn" onClick={() => advance(false)}>Skip →</button>
+            <button className="tr-done-btn" onClick={() => advance(true)}>✅ Done! +{task.points||5}pts</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function Dashboard({store, setStore, onPersonTap, onNavigate}){
   const now=useClock();
   const upcoming=(WEEKLY_SCHEDULE[todayKey()]||[]).filter(ev=>{
     const[h,m]=ev.time.split(':').map(Number);
@@ -31,6 +106,7 @@ export default function Dashboard({store,onPersonTap,onNavigate}){
       <div className="dash-family-title">Molina Phillips</div>
       <div className="dash-meta"><div className="dash-streak">🔥 {store.familyStreak||0} day streak</div><div className="dash-overall">{total()}% today</div></div>
     </div>
+    <TaskRunner store={store} setStore={setStore} now={now} />
     <div className="dash-avatars">
       {FAMILY.map(f=>{
         const p=pct(f.id),pts=store.points?.[f.id]||0,sc=store.screenTime?.[f.id]||0;
@@ -50,6 +126,5 @@ export default function Dashboard({store,onPersonTap,onNavigate}){
       {[{s:'morning',l:'☀️ Morning'},{s:'afterschool',l:'🎒 After School'},{s:'schedule',l:'📅 Schedule'},{s:'jobs',l:'🏠 Jobs'},{s:'girlsrooms',l:"👧 Girls' Rooms"},{s:'gamification',l:'🏆 Points'},{s:'checkin',l:'🌙 Check-in'},{s:'bedtime',l:'💤 Bedtime'}]
         .map(n=><button key={n.s} className="dash-nav-btn" onClick={()=>onNavigate(n.s)}>{n.l}</button>)}
     </div>
-    <div className="dash-weather">☁️ Weather widget — coming soon</div>
   </div>);
 }
